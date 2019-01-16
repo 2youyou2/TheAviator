@@ -1,0 +1,107 @@
+%{
+  techniques: [
+    {
+      passes: [
+        {
+          vert: vs
+          frag: fs
+          stage: forward
+          cullMode: back
+          depthTest: true
+          depthWrite: true
+          blend: true
+        }
+      ]
+    }
+    {
+      stages: [ 'shadowcast' ]
+      passes: [
+        {
+          vert: shadow-depth-vs:vert
+          frag: shadow-depth-fs:frag
+          stage: shadowcast
+          cullMode: back
+          depthTest: true
+          depthWrite: true
+        }
+      ]
+    }
+  ]
+
+  properties: {
+    mainTiling: { type: 'vec2', value: [1, 1] }
+    mainOffset: { type: 'vec2', value: [0, 0] }
+    diffuseColor: { type: 'color4', value: [1, 1, 1, 1] }
+    diffuseTexture: { type: 'sampler2D', value: null }
+    glossiness: { type: 'float', value: 10 }
+  }
+%}
+
+%% vs {
+
+#include <cc-local>
+#include <cc-global>
+
+varying vec3 v_worldPos;
+varying vec3 v_viewPos;
+
+#include <common-attribute>
+#include <shadowmap-declare-vert>
+
+void main () {
+  vec4 position = vec4(a_position, 1);
+
+  vec4 model = cc_matWorld * position;
+  v_worldPos = model.xyz;
+
+  v_viewPos = -(cc_matView * model).xyz;
+
+  CLAC_SHADOW();
+  ATTRIBUTE_TO_VARYING();
+  
+  gl_Position = cc_matViewProj * model;
+}
+
+}
+
+%% fs {
+
+// for use dFdx/dFdy
+#extension GL_OES_standard_derivatives : enable
+
+#include <cc-global>
+#include <common-attribute>
+#include <encodings>
+
+varying vec3 v_worldPos;
+varying vec3 v_viewPos;
+
+#include <diffuse>
+#include <lights-phong>
+
+void main () {
+  vec4 diffuse;
+  CALC_DIFFUSE(diffuse);
+
+  PhongMaterial material;
+  material.diffuse = diffuse.rgb;
+  material.opacity = diffuse.a;
+
+  material.emissive = vec3(0.0);
+  material.specular = vec3(0.0);
+
+  vec3 viewDirection = normalize(cc_cameraPos.xyz - v_worldPos);
+  vec4 phongColor;
+
+  // flat shading
+  vec3 fdx = vec3( dFdx( v_viewPos.x ), dFdx( v_viewPos.y ), dFdx( v_viewPos.z ) );
+	vec3 fdy = vec3( dFdy( v_viewPos.x ), dFdy( v_viewPos.y ), dFdy( v_viewPos.z ) );
+	vec3 normal = normalize( cross( fdx, fdy ) );
+  
+  CALC_PHONG_LIGHTING(phongColor, material, normal, v_worldPos, viewDirection);
+
+  gl_FragColor = LINEAR_TO_OUTPUT_TEXEL( phongColor );
+}
+
+
+}
