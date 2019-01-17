@@ -17,8 +17,8 @@
       stages: [ 'shadowcast' ]
       passes: [
         {
-          vert: shadow-depth-vs:vert
-          frag: shadow-depth-fs:frag
+          vert: shadow-depth-vs
+          frag: shadow-depth-fs
           stage: shadowcast
           cullMode: back
           depthTest: true

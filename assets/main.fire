@@ -55,7 +55,6 @@
       "z": 0,
       "w": 1
     },
-    "_childArrivalOrder": 466,
     "_is3DNode": true,
     "groupIndex": 0,
     "autoReleaseAssets": false,
@@ -123,7 +122,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 18,
     "_is3DNode": false,
     "groupIndex": 1,
     "_id": "eedlG2RX1JjJSrxhnITlGv"
@@ -183,7 +181,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": false,
     "groupIndex": 0,
     "_id": "c1dp+E67NJDIm9egcrIrMp"
@@ -324,7 +321,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 30,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "d5MaaR/udFVrq+GJuqt3Xk"
@@ -384,7 +380,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "3dgb5TSL9DH4fHbi66uDSS"
@@ -479,7 +474,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "66XvAK1OdDtJ1DN03w6uci"
@@ -504,13 +498,13 @@
     "_range": 1000,
     "_spotAngle": 60,
     "_spotExp": 1,
-    "_shadowType": 0,
+    "_shadowType": 1,
     "_shadowResolution": 1024,
     "_shadowDarkness": 0.5,
     "_shadowMinDepth": 1,
     "_shadowMaxDepth": 1000,
     "_shadowDepthScale": 250,
-    "_shadowFrustumSize": 50,
+    "_shadowFrustumSize": 1000,
     "_shadowBias": 0.0005,
     "_id": "10z+tVkjtDZLFucirH4uXx"
   },
@@ -575,7 +569,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "fajO0TWElLFpONBBAJDxQz"
@@ -596,7 +589,7 @@
       }
     ],
     "_mesh": null,
-    "_receiveShadows": false,
+    "_receiveShadows": true,
     "_shadowCastingMode": 0,
     "textures": [],
     "_id": "a1lMrLC+5J24+Y7NQET7CU"
@@ -693,7 +686,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "aaUhN7UZdHh61pHjshiAsE"
@@ -790,7 +782,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 21,
     "_is3DNode": true,
     "groupIndex": 2,
     "_id": "dcKhEQUgtFaoUo2eOHtQx7"
@@ -853,7 +844,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "8biPwiM0ZGTbRSr+oIIDZw"
@@ -875,7 +865,7 @@
     ],
     "_mesh": null,
     "_receiveShadows": false,
-    "_shadowCastingMode": 0,
+    "_shadowCastingMode": 1,
     "textures": [],
     "_id": "029PNlGR5DaICVyHClB0N0"
   },
@@ -957,7 +947,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "38RQ4P6KZDaobadhzLeQ4R"
@@ -979,7 +968,7 @@
     ],
     "_mesh": null,
     "_receiveShadows": false,
-    "_shadowCastingMode": 0,
+    "_shadowCastingMode": 1,
     "textures": [],
     "_id": "59/PmAt0pPrZS+vsPWDKxJ"
   },
@@ -1061,7 +1050,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "56hQkIAD5D5rV95QiMHGzS"
@@ -1083,7 +1071,7 @@
     ],
     "_mesh": null,
     "_receiveShadows": false,
-    "_shadowCastingMode": 0,
+    "_shadowCastingMode": 1,
     "textures": [],
     "_id": "e4xRVedzRPErpDd3b8u9Og"
   },
@@ -1165,7 +1153,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "d8vKqUJQlE74ZT/jaJ5gBs"
@@ -1187,7 +1174,7 @@
     ],
     "_mesh": null,
     "_receiveShadows": false,
-    "_shadowCastingMode": 0,
+    "_shadowCastingMode": 1,
     "textures": [],
     "_id": "00vXQa7BVAuIO6/6DBr+cb"
   },
@@ -1276,7 +1263,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 5,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "7fsQ/XXFVDP5XylnOZSL5i"
@@ -1339,7 +1325,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_childArrivalOrder": 1,
     "_is3DNode": true,
     "groupIndex": 0,
     "_id": "dbbC2XR3FKqrkaL/tN2x5t"
@@ -1361,7 +1346,7 @@
     ],
     "_mesh": null,
     "_receiveShadows": false,
-    "_shadowCastingMode": 0,
+    "_shadowCastingMode": 1,
     "textures": [],
     "_id": "c7PW1hvNhKqLps1dCOjYbD"
   },
@@ -1402,7 +1387,7 @@
     ],
     "_mesh": null,
     "_receiveShadows": false,
-    "_shadowCastingMode": 0,
+    "_shadowCastingMode": 1,
     "textures": [],
     "_id": "1303WTSuhJn7WrApT6hG5J"
   },
