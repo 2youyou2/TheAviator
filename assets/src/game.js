@@ -14,9 +14,13 @@ module.exports = cc.Class({
 
         world: cc.Node,
         speed: 30,
+        ratioSpeedDistance: 0.05,
 
         material: cc.Material,
         level: 1,
+
+        distanceLabel: cc.Label,
+        levelLabel: cc.Label
     },
     onLoad () {
         window.game = this;
@@ -40,6 +44,12 @@ module.exports = cc.Class({
     update (dt) {
         this.angles.z += this.speed * dt;
         this.world.eulerAngles = this.angles;
-        this.distance += this.speed * dt * this.seaHeight;
+        this.distance += this.speed * dt * this.ratioSpeedDistance;
+    
+        this.updateUI();
+    },
+    updateUI () {
+        this.distanceLabel.string = this.distance | 0;
+        this.levelLabel.string = this.level;
     }
 });
