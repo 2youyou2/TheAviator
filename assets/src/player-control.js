@@ -12,10 +12,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        defaultY: 100,
-        yRange: 80,
-        xRange: 100,
-        
         moveSensivity: 5,
         rotXSensivity: 0.8,
         rotZSensivity: 0.4,
@@ -25,8 +21,12 @@ cc.Class({
     },
     
     onLoad () {
+        this.reset();
+    },
+    reset () {
+        this.angles = cc.v3();
+        this.node.position = cc.v3(0, game.playerDefaultY, 0);
         this.touchPos = cc.v2();
-        this.rotation = this.node.eulerAngles;
     },
 
     start () {
@@ -53,15 +53,15 @@ cc.Class({
     update (dt) {
         let touchPos = this.touchPos;
 
-        let targetY = normalize(touchPos.y, -.75,.75, this.defaultY-this.yRange, this.defaultY+this.yRange);
-        let targetX = normalize(touchPos.x, -1,1, -this.xRange*0.7, -this.xRange);
+        let targetY = normalize(touchPos.y, -.75,.75, game.playerDefaultY-game.playerYRange, game.playerDefaultY+game.playerYRange);
+        let targetX = normalize(touchPos.x, -1,1, -game.playerXRange*0.7, -game.playerXRange);
 
         this.node.y += (targetY - this.node.y) * dt * this.moveSensivity;
         this.node.x += (targetX - this.node.x) * dt * this.moveSensivity;
 
-        this.rotation.z = (targetY - this.node.y) * dt * this.rotZSensivity;
-        this.rotation.x = (this.node.y - targetY) * dt * this.rotXSensivity;
-        this.node.eulerAngles = this.rotation;
+        this.angles.z = (targetY - this.node.y) * dt * this.rotZSensivity;
+        this.angles.x = (this.node.y - targetY) * dt * this.rotXSensivity;
+        this.node.eulerAngles = this.angles;
 
         let camera = this.camera;
         camera.fov = normalize(touchPos.x, -1,1, 40,80);

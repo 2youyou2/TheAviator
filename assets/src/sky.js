@@ -7,14 +7,10 @@ cc.Class({
 
     properties: {
         cloudCount: 20,
-
-        groundHeight: 600,
-        skyHeight: 150,
-        skyHeightRange: 200,
+        cloudColor: cc.color().fromHEX('0xF7D9AA'),
 
         rotateSpeed: 360,
 
-        material: cc.Material,
         blockPrefab: cc.Prefab
     },
 
@@ -28,7 +24,7 @@ cc.Class({
             clouds[i] = cloud;
 
             let a = stepAngle * i;
-            let h = this.groundHeight + this.skyHeight + Math.random() * this.skyHeightRange;
+            let h = game.seaHeight + game.skyHeight + Math.random() * game.skyHeightRange;
 
             cloud.y = Math.sin(a) * h;
             cloud.x = Math.cos(a) * h;
@@ -49,20 +45,8 @@ cc.Class({
     // for use the same mesh
     _initMesh () {
         let data = cc.primitive.box(1, 1, 1);
-        let color = '0xF7D9AA';//'0xd8d0d1'
-        let mesh = Primitive.createMesh(data, cc.color().fromHEX(color));
+        let mesh = Primitive.createMesh(data, this.cloudColor);
         this._mesh = mesh;
-    },
-
-    createBlock () {
-        let block = new cc.Node('block');
-        block.is3DNode = true;
-        let renderer = block.addComponent(cc.MeshRenderer);
-        renderer.setMaterial(0, this.material);
-        renderer.mesh = this._mesh;
-
-        // let block = cc.instantiate(this.blockPrefab);
-        return block;
     },
 
     createCloud () {
@@ -71,7 +55,7 @@ cc.Class({
 
         let nBlocks = 3 + Math.floor(Math.random() * 3);
         for (let i = 0; i < nBlocks; i++) {
-            let block = this.createBlock();
+            let block = window.game.createMeshNode('barrier', this._mesh);
 
             block.x = i * 15;
             block.y = Math.random() * 10;
@@ -91,9 +75,6 @@ cc.Class({
     },
 
     update (dt) {
-        this.node._eulerAngles.z += this.rotateSpeed * dt;
-        this.node.eulerAngles = this.node._eulerAngles;
-
         for (let i = 0; i < this.clouds.length; i++) {
             let cloud = this.clouds[i];
 

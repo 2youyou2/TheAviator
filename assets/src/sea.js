@@ -149,9 +149,6 @@ cc.Class({
     },
 
     update (dt) {
-        this.node._eulerAngles.z += this.rotateSpeed * dt;
-        this.node.eulerAngles = this.node._eulerAngles;
-
         let positions = this.data.positions;
         for (let i = 0, l = positions.length; i < l; i += 3) {
             let vprops = this.waves[i / 3];
