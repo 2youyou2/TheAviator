@@ -1,20 +1,12 @@
 {
     "scripts": {
-        "deploy": "gh-pages-deploy"
+        "deploy": "git-deploy"
+    },
+    "git-deploy": {
+        "deploy_dir": "build/web-mobile",
+        "repo": "git@github.com:2youyou2/TheAviator.git"
     },
     "devDependencies": {
-        "gh-pages-deploy": "^0.5.1"
-    },
-    "gh-pages-deploy": {
-        "staticpath": "build/web-mobile"
-    },
-    "dependencies": {
-        "bluebird": "^3.5.3",
-        "child-process-promise": "^2.2.1",
-        "fs-extra": "^7.0.1",
-        "hexo-fs": "^1.0.2",
-        "hexo-util": "^0.6.3",
-        "moment": "^2.24.0",
-        "swig-templates": "^2.0.3"
+        "git-deploy": "github:2youyou2/git-deploy"
     }
 }
