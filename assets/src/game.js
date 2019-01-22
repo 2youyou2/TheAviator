@@ -17,10 +17,18 @@ module.exports = cc.Class({
         ratioSpeedDistance: 0.05,
 
         material: cc.Material,
-        level: 1,
+        levelDistance: 1000,
 
         distanceLabel: cc.Label,
-        levelLabel: cc.Label
+        levelLabel: cc.Label,
+        energyProgress: cc.ProgressBar,
+
+        collisionDistance: 15,
+
+        energy: 1,
+
+        player: cc.Node,
+        enemyManager: cc.Node
     },
     onLoad () {
         window.game = this;
@@ -29,6 +37,9 @@ module.exports = cc.Class({
     reset () {
         this.angles = cc.v3();
         this.distance = 0;
+        this.lastLevelDistance = 0;
+
+        this.level = 1;
     },
 
     createMeshNode (name, mesh, shadowCast) {
@@ -44,12 +55,49 @@ module.exports = cc.Class({
     update (dt) {
         this.angles.z += this.speed * dt;
         this.world.eulerAngles = this.angles;
-        this.distance += this.speed * dt * this.ratioSpeedDistance;
+
+        this.checkCollision();
+        
+        let distance = this.speed * dt * this.ratioSpeedDistance;
+        this.distance += distance;
+        this.lastLevelDistance += distance;
+        
+        if (this.lastLevelDistance > this.levelDistance) {
+            this.level ++;
+            this.lastLevelDistance = this.lastLevelDistance % this.levelDistance;
+            this.node.emit('level-upgrade');
+        }
     
         this.updateUI();
     },
+
     updateUI () {
         this.distanceLabel.string = this.distance | 0;
         this.levelLabel.string = this.level;
-    }
+        if (this.energyProgress.progress !== this.energy) {
+            this.energyProgress.progress = this.energy;
+        }
+    },
+
+    checkCollision: (function () {
+        let zeroPos = cc.v2();
+        let playerPos = cc.v2();
+        let enemyPos = cc.v2();
+        let dif = cc.v2();
+        return function () {
+            playerPos = this.player.convertToWorldSpaceAR(zeroPos, playerPos);
+
+            let enemies = this.enemyManager.getComponent('enemy-manager').enemies;
+            for (let i = 0; i < enemies.length; i++) {
+                let enemy = enemies[i];
+                enemyPos = enemies[i].convertToWorldSpaceAR(zeroPos, enemyPos);
+                let distance = playerPos.sub(enemyPos, dif).mag();
+                if (distance < this.collisionDistance) {
+                    this.energy -= 0.1;
+                    this.node.emit('collide-enemy', {dif, enemy, distance});
+                    break;
+                }
+            }
+        }
+    })()
 });

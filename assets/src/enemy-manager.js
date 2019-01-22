@@ -18,7 +18,7 @@ cc.Class({
     start () {
         this._initMesh();
 
-        this.enemyInUse = [];
+        this.enemies = [];
         let enemyPool = this.enemyPool = [];
         for (let i = 0; i < this.enemyCount; i++) {
             let node = this.createEnemy();
@@ -26,6 +26,9 @@ cc.Class({
         }
 
         this.spawnEnemy();
+
+        window.game.node.on('level-upgrade', this.spawnEnemy, this);
+        window.game.node.on('collide-enemy', this.onCollider, this);
     },
 
     createEnemy () {
@@ -35,13 +38,13 @@ cc.Class({
     spawnEnemy () {
         let nEnemies = window.game.level;
         let pool = this.enemyPool;
-        let enemies = this.enemyInUse;
+        let enemies = this.enemies;
         for (let i = 0; i < nEnemies; i++) {
             let enemy = pool.pop();
             if (!enemy) {
                 enemy = this.createEnemy();
             }
-            let angle = - (i*0.1);
+            let angle = -window.game.angles.z - (i*0.1);
             let distance = game.seaHeight + game.playerDefaultY + (-1 + Math.random() * 2) * (game.playerYRange-20);
             enemy.x = Math.cos(angle) * distance;
             enemy.y = Math.sin(angle) * distance;
@@ -51,8 +54,14 @@ cc.Class({
         }
     },
 
+    onCollider ({enemy}) {
+        this.enemies.splice(this.enemies.indexOf(enemy), 1);
+        this.enemyPool.push(enemy);
+        enemy.parent = null;
+    },
+
     update (dt) {
-        let enemies = this.enemyInUse;
+        let enemies = this.enemies;
         for (let i = 0; i < enemies.length; i++) {
             let enemy = enemies[i];
             enemy._eulerAngles.x += Math.random() ;
