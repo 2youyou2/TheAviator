@@ -65,3 +65,10 @@ quick_gen_project_*_autogen.sh.meta
 #//////////////////////////
 
 .vscode/
+
+
+#//////////////////////////
+# node modules
+#//////////////////////////
+node_modules/
+package-lock.json
