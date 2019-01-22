@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "deploy": "gh-pages-deploy"
+    },
+    "devDependencies": {
+        "gh-pages-deploy": "^0.5.1"
+    },
+    "gh-pages-deploy": {
+        "staticpath": "build/web-mobile"
+    }
+}
