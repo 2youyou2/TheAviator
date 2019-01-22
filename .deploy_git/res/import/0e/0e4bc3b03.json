@@ -1,0 +1,104 @@
+[
+  {
+    "__type__": "cc.EffectAsset",
+    "_name": "builtin-spine",
+    "properties": {
+      "texture": {
+        "type": 13,
+        "value": null
+      },
+      "alphaThreshold": {
+        "value": 0.5
+      }
+    },
+    "techniques": [
+      {
+        "passes": [
+          {
+            "cullMode": 0,
+            "blend": true,
+            "program": "ed31a34f5c1526dc1892be272b1ab79f217caf18b2913e1215bf8a0a"
+          }
+        ],
+        "layer": 0,
+        "stages": [
+          "opaque"
+        ],
+        "queue": 0,
+        "priority": 0
+      }
+    ],
+    "shaders": [
+      {
+        "vert": "#define _IS_VERT_SHADER 1\n\nuniform mat4 cc_matViewProj;\n\n#if _USE_MODEL\n  uniform mat4 cc_matWorld;\n#endif\n\nattribute vec3 a_position;\nattribute lowp vec4 a_color;\n#if USE_TINT\n  attribute lowp vec4 a_color0;\n#endif\n\nattribute mediump vec2 a_uv0;\nvarying mediump vec2 v_uv0;\n\nvarying lowp vec4 v_light;\n#if USE_TINT\n  varying lowp vec4 v_dark;\n#endif\n\nvoid main () {\n  mat4 mvp;\n  \n  #if _USE_MODEL\n    mvp = cc_matViewProj * cc_matWorld;\n  #else\n    mvp = cc_matViewProj;\n  #endif\n\n  v_uv0 = a_uv0;\n\n  v_light = a_color;\n  #if USE_TINT\n    v_dark = a_color0;\n  #endif\n\n  gl_Position = mvp * vec4(a_position, 1);\n}\n\n",
+        "frag": "#define _IS_FRAG_SHADER 1\n\nuniform sampler2D texture;\nvarying mediump vec2 v_uv0;\n\n#if USE_ALPHA_TEST\n  uniform float alphaThreshold;\n#endif\n\nvoid ALPHA_TEST (in vec4 color) {\n  #if USE_ALPHA_TEST\n      if (color.a < alphaThreshold) discard;\n  #endif\n}\n\nvoid ALPHA_TEST (in float alpha) {\n  #if USE_ALPHA_TEST\n      if (alpha < alphaThreshold) discard;\n  #endif\n}\n\nvarying lowp vec4 v_light;\n#if USE_TINT\n  varying lowp vec4 v_dark;\n#endif\n\nvoid main () {\n  vec4 texColor = texture2D(texture, v_uv0);\n  vec4 finalColor;\n\n  #if USE_TINT\n    finalColor.a = v_light.a * texColor.a;\n    finalColor.rgb = ((texColor.a - 1.0) * v_dark.a + 1.0 - texColor.rgb) * v_dark.rgb + texColor.rgb * v_light.rgb;\n  #else\n    finalColor = texColor * v_light;\n  #endif\n\n  ALPHA_TEST(finalColor);\n\n  gl_FragColor = finalColor;\n}\n\n",
+        "defines": [
+          {
+            "name": "_USE_MODEL",
+            "type": "boolean",
+            "defines": []
+          },
+          {
+            "name": "USE_TINT",
+            "type": "boolean",
+            "defines": []
+          },
+          {
+            "name": "USE_ALPHA_TEST",
+            "type": "boolean",
+            "defines": []
+          }
+        ],
+        "uniforms": [
+          {
+            "name": "texture",
+            "type": 13,
+            "defines": []
+          },
+          {
+            "name": "alphaThreshold",
+            "type": 4,
+            "defines": [
+              "USE_ALPHA_TEST"
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "name": "a_position",
+            "type": 6,
+            "defines": []
+          },
+          {
+            "name": "a_color",
+            "type": 7,
+            "defines": []
+          },
+          {
+            "name": "a_color0",
+            "type": 7,
+            "defines": [
+              "USE_TINT"
+            ]
+          },
+          {
+            "name": "a_uv0",
+            "type": 5,
+            "defines": []
+          }
+        ],
+        "extensions": [],
+        "name": "ed31a34f5c1526dc1892be272b1ab79f217caf18b2913e1215bf8a0a"
+      }
+    ]
+  },
+  {
+    "__type__": "cc.Material",
+    "_name": "builtin-spine",
+    "_effectAsset": {
+      "__uuid__": "0ek66qC1NOQLjgYmi04HvX"
+    },
+    "_defines": {},
+    "_props": {}
+  }
+]

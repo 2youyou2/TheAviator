@@ -1,0 +1,66 @@
+[
+  {
+    "__type__": "cc.EffectAsset",
+    "_name": "builtin-gray-sprite",
+    "properties": {
+      "texture": {
+        "type": 13,
+        "value": null
+      }
+    },
+    "techniques": [
+      {
+        "passes": [
+          {
+            "cullMode": 0,
+            "blend": true,
+            "program": "cd4866848b84dc04ebeb8237f3326b52e2c3ae09af8fbc52bb634751"
+          }
+        ],
+        "layer": 0,
+        "stages": [
+          "opaque"
+        ],
+        "queue": 0,
+        "priority": 0
+      }
+    ],
+    "shaders": [
+      {
+        "vert": "#define _IS_VERT_SHADER 1\n\nuniform mat4 cc_matViewProj;\nattribute vec3 a_position;\nattribute mediump vec2 a_uv0;\nvarying mediump vec2 v_uv0;\n\nvoid main () {\n  gl_Position = cc_matViewProj * vec4(a_position, 1);\n  v_uv0 = a_uv0;\n}\n\n",
+        "frag": "#define _IS_FRAG_SHADER 1\n\nuniform sampler2D texture;\nvarying mediump vec2 v_uv0;\n\nvoid main () {\n  vec4 c = texture2D(texture, v_uv0);\n  float gray = 0.2126*c.r + 0.7152*c.g + 0.0722*c.b;\n  gl_FragColor = vec4(gray, gray, gray, c.a);\n}\n\n",
+        "defines": [],
+        "uniforms": [
+          {
+            "name": "texture",
+            "type": 13,
+            "defines": []
+          }
+        ],
+        "attributes": [
+          {
+            "name": "a_position",
+            "type": 6,
+            "defines": []
+          },
+          {
+            "name": "a_uv0",
+            "type": 5,
+            "defines": []
+          }
+        ],
+        "extensions": [],
+        "name": "cd4866848b84dc04ebeb8237f3326b52e2c3ae09af8fbc52bb634751"
+      }
+    ]
+  },
+  {
+    "__type__": "cc.Material",
+    "_name": "builtin-gray-sprite",
+    "_effectAsset": {
+      "__uuid__": "14TDKXr2NJ6LjvHPops74o"
+    },
+    "_defines": {},
+    "_props": {}
+  }
+]
