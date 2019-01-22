@@ -37,6 +37,8 @@ module.exports = function(args) {
       args[i] = arguments[i];
     }
 
+    console.log('tmpDeployDir : ' + tmpDeployDir)
+
     return spawn('git', args, {
       cwd: tmpDeployDir,
       verbose: verbose,
