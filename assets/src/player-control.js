@@ -52,8 +52,8 @@ cc.Class({
     },
 
     onCollider ({dif, distance}) {
-        this.planeCollisionSpeedX = 100 * dif.x / distance;
-        this.planeCollisionSpeedY = 100 * dif.y / distance;
+        this.planeCollisionSpeedX = 150 * dif.x / distance;
+        this.planeCollisionSpeedY = 150 * dif.y / distance;
     },
 
     _setTouchPos (pos) {

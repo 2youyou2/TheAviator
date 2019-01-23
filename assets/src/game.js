@@ -1,4 +1,8 @@
 
+function equal (a, b) {
+    return Math.abs(a - b) < 10e-6;
+}
+
 module.exports = cc.Class({
     extends: cc.Component,
 
@@ -26,6 +30,7 @@ module.exports = cc.Class({
         collisionDistance: 15,
 
         energy: 1,
+        collisionDamage: 0.1,
 
         player: cc.Node,
         enemyManager: cc.Node
@@ -74,8 +79,8 @@ module.exports = cc.Class({
     updateUI () {
         this.distanceLabel.string = this.distance | 0;
         this.levelLabel.string = this.level;
-        if (this.energyProgress.progress !== this.energy) {
-            this.energyProgress.progress = this.energy;
+        if (!equal(this.energyProgress.progress, this.energy)) {
+            this.energyProgress.progress -= this.collisionDamage / 20;
         }
     },
 
@@ -93,7 +98,7 @@ module.exports = cc.Class({
                 enemyPos = enemies[i].convertToWorldSpaceAR(zeroPos, enemyPos);
                 let distance = playerPos.sub(enemyPos, dif).mag();
                 if (distance < this.collisionDistance) {
-                    this.energy -= 0.1;
+                    this.energy -= this.collisionDamage;
                     this.node.emit('collide-enemy', {dif, enemy, distance});
                     break;
                 }
