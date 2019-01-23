@@ -6,5 +6,6 @@ Online Demo : http://2youyou2.com/TheAviator
 
 # Screenshots
 
-![image](https://user-images.githubusercontent.com/1862402/51380384-9dc66480-1b4c-11e9-9979-7355953f9293.png)
+![image](https://user-images.githubusercontent.com/1862402/51579784-2f432700-1efd-11e9-8100-02a3e254f774.png)
+
 
