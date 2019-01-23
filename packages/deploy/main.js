@@ -30,6 +30,7 @@ module.exports = {
             });
             child.on('close', function () {
                 child = null;
+                Editor.info('Finished deploying the aviator.');
             });
         }
     }
