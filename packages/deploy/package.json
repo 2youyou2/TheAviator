@@ -1,0 +1,9 @@
+{
+    "name": "the-aviator-deploy",
+    "main": "main.js",
+    "main-menu": {
+        "i18n:MAIN_MENU.project.title/Deploy TheAviator": {
+            "message": "the-aviator-deploy:deploy-the-aviator"
+        }
+    }
+}
