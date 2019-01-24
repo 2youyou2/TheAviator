@@ -21,7 +21,9 @@ module.exports = cc.Class({
         ratioSpeedDistance: 0.05,
 
         material: cc.Material,
-        levelDistance: 1000,
+        levelDistance: 500,
+        
+        upgradeRatio: 1.2,
 
         distanceLabel: cc.Label,
         levelLabel: cc.Label,
@@ -70,7 +72,8 @@ module.exports = cc.Class({
         if (this.lastLevelDistance > this.levelDistance) {
             this.level ++;
             this.lastLevelDistance = this.lastLevelDistance % this.levelDistance;
-            this.speed *= 1.1;
+            this.speed *= this.upgradeRatio;
+            this.levelDistance *= this.upgradeRatio;
             this.node.emit('level-upgrade');
         }
     

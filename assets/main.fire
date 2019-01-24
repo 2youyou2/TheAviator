@@ -2626,7 +2626,8 @@
     "material": {
       "__uuid__": "0474aa8c-5a96-4838-b696-48530f388d6f"
     },
-    "levelDistance": 1000,
+    "levelDistance": 500,
+    "upgradeRatio": 1.2,
     "distanceLabel": {
       "__id__": 22
     },
