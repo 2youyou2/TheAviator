@@ -133,6 +133,7 @@ cc.Class({
     start () {
         this.node._eulerAngles = cc.v3(-90, 0, 0);
         let data = this.data = this.getComponent('cylinder').data;
+        this.mesh = this.getComponent(cc.MeshRenderer).mesh;
 
         this.waves = [];
         let positions = data.positions;
@@ -145,7 +146,35 @@ cc.Class({
             });
         };
 
-        this.mesh = this.getComponent(cc.MeshRenderer).mesh;
+        this.loopCylinder();
+    },
+
+    loopCylinder () {
+        let cylinder = this.getComponent('cylinder');
+        let heightSegments = cylinder.heightSegments;
+        let radialSegments = cylinder.radialSegments;
+
+        let indices = cylinder.data.indices;
+        let indexOffset = indices.length;
+        let row = radialSegments + 1;
+        for (let y = 0; y < heightSegments; ++y) {
+            let i1 = y * row + radialSegments;
+            let i2 = (y + 1) * row + radialSegments;
+            let i3 = (y + 1) * row;
+            let i4 = y * row;
+    
+            // face one
+            indices[indexOffset] = i1; ++indexOffset;
+            indices[indexOffset] = i4; ++indexOffset;
+            indices[indexOffset] = i2; ++indexOffset;
+
+            // face two
+            indices[indexOffset] = i4; ++indexOffset;
+            indices[indexOffset] = i3; ++indexOffset;
+            indices[indexOffset] = i2; ++indexOffset;
+        }
+        
+        this.mesh.setIndices(indices);
     },
 
     update (dt) {

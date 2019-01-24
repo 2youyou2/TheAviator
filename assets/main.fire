@@ -1501,7 +1501,7 @@
     "_N$radiusTop": 600,
     "_N$radiusBottom": 600,
     "_N$height": 800,
-    "_N$radiusSegments": 32,
+    "_N$radialSegments": 32,
     "_N$heightSegments": 10,
     "_id": "44VHFDwZxI5pbeHh0bsl7q"
   },
@@ -1668,15 +1668,12 @@
     "cloudCount": 20,
     "cloudColor": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 247,
-      "b": 217,
-      "a": 170
+      "r": 216,
+      "g": 208,
+      "b": 209,
+      "a": 255
     },
     "rotateSpeed": 45,
-    "blockPrefab": {
-      "__uuid__": "d33cafcc-5b9b-45f9-b31f-c2b791ce1ce9"
-    },
     "_id": "acAE2GvmNNlLc1PFFkSEjJ"
   },
   {
@@ -2641,6 +2638,7 @@
     },
     "collisionDistance": 15,
     "energy": 1,
+    "collisionDamage": 0.1,
     "player": {
       "__id__": 41
     },

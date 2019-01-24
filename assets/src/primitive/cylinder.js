@@ -22,7 +22,7 @@ cc.Class({
                 this.delayInit();
             }
         },
-        radiusSegments: {
+        radialSegments: {
             default: 32,
             notify () {
                 this.delayInit();
@@ -37,7 +37,7 @@ cc.Class({
     },
     _createData () {
         return cc.primitive.cylinder(this.radiusTop, this.radiusBottom, this.height, {
-            radialSegments: this.radiusSegments,
+            radialSegments: this.radialSegments,
             heightSegments: this.heightSegments
         });
     }

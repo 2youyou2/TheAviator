@@ -10,8 +10,6 @@ cc.Class({
         cloudColor: cc.color().fromHEX('0xF7D9AA'),
 
         rotateSpeed: 360,
-
-        blockPrefab: cc.Prefab
     },
 
     start () {
