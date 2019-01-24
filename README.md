@@ -1,8 +1,17 @@
 # TheAviator
 
-This project is a Cocos Creator 2.5D port of [TheAviator](https://github.com/yakudoo/TheAviator).
+This project is a port of [TheAviator](https://github.com/yakudoo/TheAviator) based on **Cocos Creator 2.1.1**.
 
 Online Demo : http://2youyou2.com/TheAviator
+
+# Deploy
+
+This project has added a package to help auto deploy the build files to the **gh-pages** github branch.
+You can change the deploy settings **git-deploy** in the **package.json**.
+
+Deploy steps: 
+1. Build project on web-mobile platform.
+2. Click menu Project/`Deploy TheAviator`.
 
 # Screenshots
 
