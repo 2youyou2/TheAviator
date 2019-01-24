@@ -10,7 +10,7 @@ cc.Class({
     },
 
     _initMesh () {
-        let data = cc.primitive.box(10, 10, 10);
+        let data = cc.primitive.polyhedron ? cc.primitive.polyhedron(4, 8) : cc.primitive.box(8, 8, 8);
         let mesh = Primitive.createMesh(data, this.enemyColor);
         this._mesh = mesh;
     },

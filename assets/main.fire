@@ -2621,7 +2621,7 @@
     "world": {
       "__id__": 30
     },
-    "speed": 45,
+    "speed": 30,
     "ratioSpeedDistance": 1,
     "material": {
       "__uuid__": "0474aa8c-5a96-4838-b696-48530f388d6f"

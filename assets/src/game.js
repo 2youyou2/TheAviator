@@ -70,6 +70,7 @@ module.exports = cc.Class({
         if (this.lastLevelDistance > this.levelDistance) {
             this.level ++;
             this.lastLevelDistance = this.lastLevelDistance % this.levelDistance;
+            this.speed *= 1.1;
             this.node.emit('level-upgrade');
         }
     
