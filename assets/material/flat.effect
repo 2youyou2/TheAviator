@@ -39,6 +39,8 @@
 
 %% vs {
 
+precision highp float;
+
 #include <cc-local>
 #include <cc-global>
 
@@ -65,6 +67,8 @@ void main () {
 }
 
 %% fs {
+
+precision highp float;
 
 // for use dFdx/dFdy
 #extension GL_OES_standard_derivatives : enable
@@ -93,10 +97,13 @@ void main () {
   vec3 viewDirection = normalize(cc_cameraPos.xyz - v_worldPos);
   vec4 phongColor;
 
-  // flat shading
-  vec3 fdx = vec3( dFdx( v_viewPos.x ), dFdx( v_viewPos.y ), dFdx( v_viewPos.z ) );
-	vec3 fdy = vec3( dFdy( v_viewPos.x ), dFdy( v_viewPos.y ), dFdy( v_viewPos.z ) );
-	vec3 normal = normalize( cross( fdx, fdy ) );
+  vec3 normal = vec3(1.);
+  #if GL_OES_standard_derivatives
+    // flat shading
+    vec3 fdx = vec3( dFdx( v_viewPos.x ), dFdx( v_viewPos.y ), dFdx( v_viewPos.z ) );
+    vec3 fdy = vec3( dFdy( v_viewPos.x ), dFdy( v_viewPos.y ), dFdy( v_viewPos.z ) );
+    normal = normalize( cross( fdx, fdy ) );
+  #endif
   
   CALC_PHONG_LIGHTING(phongColor, material, normal, v_worldPos, viewDirection);
 
