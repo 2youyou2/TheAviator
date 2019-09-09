@@ -1,6 +1,6 @@
 # TheAviator
 
-This project is a port of [TheAviator](https://github.com/yakudoo/TheAviator) based on **Cocos Creator 2.1.1**.
+This project is a port of [TheAviator](https://github.com/yakudoo/TheAviator) based on **Cocos Creator 2.2.0**.
 
 Online Demo : http://2youyou2.com/TheAviator
 

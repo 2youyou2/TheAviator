@@ -7,8 +7,9 @@
     "__uuid__": "c2323431-c266-4c42-8ecd-be6ea542f620"
   },
   "_defines": {
-    "USE_SPECULAR_TEXTURE": false,
-    "USE_SPECULAR": false
+    "USE_DERIVATIVES": true
   },
-  "_props": {}
+  "_props": {
+    "glossiness": 1
+  }
 }

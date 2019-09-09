@@ -1,54 +1,44 @@
-%{
-  techniques: [
-    {
-      passes: [
-        {
-          vert: vs
-          frag: fs
-          stage: forward
+
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: vs
+      frag: fs
+      depthStencilState:
+        depthTest: true
+        depthWrite: true
+      blendState:
+        targets:
+        - blend: true
+      properties:
+        diffuseColor: { value: [1, 1, 1, 1], inspector: { type: color } }
+        glossiness: { value: 10 }
+  - stages:
+      - shadowcast
+    passes:
+      - vert: shadow-map-vs
+        frag: shadow-map-fs
+        rasterizerState:
           cullMode: back
+        depthStencilState:
           depthTest: true
           depthWrite: true
-          blend: true
-        }
-      ]
-    }
-    {
-      stages: [ 'shadowcast' ]
-      passes: [
-        {
-          vert: shadow-depth-vs
-          frag: shadow-depth-fs
-          stage: shadowcast
-          cullMode: back
-          depthTest: true
-          depthWrite: true
-        }
-      ]
-    }
-  ]
+}%
 
-  properties: {
-    mainTiling: { type: 'vec2', value: [1, 1] }
-    mainOffset: { type: 'vec2', value: [0, 0] }
-    diffuseColor: { type: 'color4', value: [1, 1, 1, 1] }
-    diffuseTexture: { type: 'sampler2D', value: null }
-    glossiness: { type: 'float', value: 10 }
-  }
-%}
-
-%% vs {
+CCProgram vs %{
 
 precision highp float;
 
 #include <cc-local>
 #include <cc-global>
+#include <shadow>
 
-varying vec3 v_worldPos;
-varying vec3 v_viewPos;
+in vec3 a_position;
+in vec4 a_color;
 
-#include <common-attribute>
-#include <shadowmap-declare-vert>
+out vec3 v_worldPos;
+out vec3 v_viewPos;
+out vec4 v_color;
 
 void main () {
   vec4 position = vec4(a_position, 1);
@@ -58,34 +48,38 @@ void main () {
 
   v_viewPos = -(cc_matView * model).xyz;
 
-  CLAC_SHADOW();
-  ATTRIBUTE_TO_VARYING();
+  CLAC_SHADOW(v_worldPos);
+
+  v_color = a_color;
   
   gl_Position = cc_matViewProj * model;
 }
 
-}
+}%
 
-%% fs {
+CCProgram fs %{
+
+// for use dFdx/dFdy
+#if USE_DERIVATIVES
+  #extension GL_OES_standard_derivatives : enable
+#endif
 
 precision highp float;
 
-// for use dFdx/dFdy
-#extension GL_OES_standard_derivatives : enable
-
 #include <cc-global>
-#include <common-attribute>
 #include <encodings>
+#include <phong>
 
-varying vec3 v_worldPos;
-varying vec3 v_viewPos;
+in vec3 v_worldPos;
+in vec3 v_viewPos;
+in vec4 v_color;
 
-#include <diffuse>
-#include <lights-phong>
+uniform DIFFUSE {
+  lowp vec4 diffuseColor;
+};
 
 void main () {
-  vec4 diffuse;
-  CALC_DIFFUSE(diffuse);
+  vec4 diffuse = diffuseColor * v_color;
 
   PhongMaterial material;
   material.diffuse = diffuse.rgb;
@@ -98,7 +92,7 @@ void main () {
   vec4 phongColor;
 
   vec3 normal = vec3(1.);
-  #if GL_OES_standard_derivatives
+  #if USE_DERIVATIVES
     // flat shading
     vec3 fdx = vec3( dFdx( v_viewPos.x ), dFdx( v_viewPos.y ), dFdx( v_viewPos.z ) );
     vec3 fdy = vec3( dFdy( v_viewPos.x ), dFdy( v_viewPos.y ), dFdy( v_viewPos.z ) );
@@ -111,4 +105,4 @@ void main () {
 }
 
 
-}
+}%
