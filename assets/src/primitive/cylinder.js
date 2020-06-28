@@ -38,7 +38,9 @@ cc.Class({
     _createData () {
         return cc.primitive.cylinder(this.radiusTop, this.radiusBottom, this.height, {
             radialSegments: this.radialSegments,
-            heightSegments: this.heightSegments
+            heightSegments: this.heightSegments,
+            capped: true, 
+            arc: 2.0 * Math.PI
         });
     }
 });

@@ -1,15 +1,18 @@
 {
   "__type__": "cc.Material",
-  "_name": "",
+  "_name": "flat",
   "_objFlags": 0,
   "_native": "",
   "_effectAsset": {
     "__uuid__": "c2323431-c266-4c42-8ecd-be6ea542f620"
   },
-  "_defines": {
-    "USE_DERIVATIVES": true
-  },
-  "_props": {
-    "glossiness": 1
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "props": {},
+      "defines": {
+        "USE_DERIVATIVES": true
+      }
+    }
   }
 }

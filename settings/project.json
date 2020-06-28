@@ -40,7 +40,11 @@
     "NodePool",
     "StudioComponent",
     "Intersection",
-    "Native Socket"
+    "Native Socket",
+    "3D Physics/cannon.js",
+    "3D Physics/Builtin",
+    "3D Particle",
+    "SafeArea"
   ],
   "facebook": {
     "appID": "",
@@ -60,7 +64,7 @@
     "player",
     "enemy"
   ],
-  "last-module-event-record-time": 1548142653320,
+  "last-module-event-record-time": 1593326784985,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,
@@ -69,5 +73,8 @@
   "use-customize-simulator": false,
   "use-project-simulator-setting": false,
   "start-scene": "current",
-  "assets-sort-type": "name"
+  "assets-sort-type": "name",
+  "migrate-history": [
+    "cloud-function"
+  ]
 }
